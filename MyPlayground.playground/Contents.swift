@@ -405,6 +405,13 @@ car = nil
 /*
  A closure in Swift is a self-contained block of code that can be passed around and executed later. Closures are similar to functions but can capture and store references to variables and constants from their surrounding context.
  
+ Closures can:
+ 
+ ● Be stored in variables
+ ● Be passed as parameters
+ ● Return values
+ ● Capture external values
+ 
  Basic Closure Syntax:-
  
  let greet = { (name: String) in
@@ -417,6 +424,20 @@ car = nil
  Escaping Closures: - An escaping closure is executed after the function returns, meaning it is stored for later use.
  
  AutoClosure (@autoclosure):- An autoclosure automatically wraps an expression inside a closure.
+ 
+ Trailing Closure:- A trailing closure is a closure written outside the parentheses of a function call, especially useful when the closure is the last argument.
+ 
+ Example:-
+ UIView.animate(withDuration: 0.3) {
+ view.alpha = 0
+ }
+ 
+ Note:- Trailing closures make code cleaner and more readable, especially in SwiftUI or
+ async tasks.
+ 
+ 
+ 
+ 
  
  typealias:- A typealias in Swift is used to create an alternative name for an existing type. It makes code more readable, flexible, and easier to maintain.
  syntax :- typealias NewName = ExistingType
@@ -466,22 +487,9 @@ Controller → Acts as a mediator between the Model and View. It handles user in
 // MARK: -MVVM
 /*Model → Represents the data layer (same as MVC).
 View → UI elements (UIView, UIButton, UILabel).
-ViewModel → The logic layer that manages UI-related logic and prepares data for the View. It is independent of UIKit, making it more testable.*/
-
-
-// MARK: - Core Components of Core Data
-
-/*
- The main components of Core Data Stack:
-
- NSManagedObject → Represents a record in Core Data.
- NSManagedObjectContext → Manages objects and tracks changes.
- NSPersistentContainer → Encapsulates the entire Core Data stack.
- NSPersistentStoreCoordinator → Connects objects to the persistent store.
- NSFetchRequest → Retrieves data from Core Data.
- NSPersistentStore → Physical storage (SQLite, XML, Binary, etc.).
- 
+ViewModel → The logic layer that manages UI-related logic and prepares data for the View. It is independent of UIKit, making it more testable.
  */
+
 
 //MARK: - Frame vs Bounds
 /*
@@ -522,50 +530,90 @@ ViewModel → The logic layer that manages UI-related logic and prepares data fo
  5.
  */
 
-// Sort array without predefined function
-func sortArrayWithoutPredefinedFunction(_ inputArray: [Int]) -> [Int] {
-    var arr = inputArray
-    let n = arr.count
-    print("Original Array: \(arr)")
-    for i in 0..<n-1 {
-        for j in 0..<n-i-1 {
-            if arr[j] > arr[j + 1] {
-                let temp = arr[j]
-                arr[j] = arr[j + 1]
-                arr[j + 1] = temp
-            }
-        }
-    }
-    print("Sorted Array (Inside Function): \(arr)")
-    return arr
-}
-
-let arrSort = [10, 15, 3, 4, 7, 9]
-let sortedArray = sortArrayWithoutPredefinedFunction(arrSort)
-print("Final Sorted Array: \(sortedArray)")
-
-/*Write a Swift function that finds the first non-repeating character in a given string and returns it. If all characters are repeating or the string is empty, return nil.
- 
- Input: "Gaurav"
- Output: "G"
-  
+//MARK: - SwiftUI view Life cycle
+/*
+ init()
+ body
+ .onAppear()
+ .onDisappear()
+ .task
+ .onChange(of:)
  */
-func findFirstNonRepeatingCharactrer(in strName: String) -> Character? {
-    var charCount: [Character: Int] = [:]
-    
-    for str in strName {
-        charCount[str, default: 0] += 1
-    }
-    
-    for str in strName {
-        if charCount[str] == 1 {
-            return str
-        }
-    }
-    return nil
-}
 
-print(findFirstNonRepeatingCharactrer(in: "Gaurav") ?? "")
+/*
+ @State
+Used for local state within a view. When the value changes, the view updates.
+ 
+ @Binding
+ Used to create a two-way connection to a value that’s owned by a parent view.
+ 
+ @ObservedObject
+ Used for observing a reference type (class) that conforms to ObservableObject. Updates the view when a @Published property changes.
+ 
+ @StateObject
+ Introduced in iOS 14+, similar to @ObservedObject, but used to create and own the ObservableObject.
+ 
+ @EnvironmentObject
+ Used to inject shared data from the environment, often at a high level in the app.
+ 
+ @Environment
+ Used to access system values from the SwiftUI environment, like colorScheme, presentationMode, etc.
+ 
+ @AppStorage
+ Used for reading/writing to UserDefaults.
+ 
+ */
+
+//MARK: - ViewModifier
+/* A ViewModifier is used to apply changes to a view, such as styling or transformations, in a reusable manner.*/
+
+//MARK:- What is a Property Wrapper in Swift?
+/*
+ A property wrapper in Swift is a generic structure or class that encapsulates the behavior for a
+ property. It provides a way to add logic around property access (getters and setters) while
+ keeping the property declaration clean and reusable. Property wrappers can be used for
+ behaviors like validation, data storage, and synchronization.
+ 
+ A property wrapper is defined using the @ symbol and can be applied to any property.
+ */
+
+// MARK: - Core Data Related
+
+/*What is Core Data?
+ Core Data is Apple’s object graph and persistence framework. It allows you to manage the model layer objects in your app and persist data efficiently using SQLite, Binary, or In-Memory stores.
+ 
+ 
+ */
+
+// MARK: - Core Components of Core Data
+
+/*
+ The main components of Core Data Stack:
+
+ NSManagedObject → Represents a record in Core Data.
+ NSManagedObjectContext → Manages objects and tracks changes.
+ NSPersistentContainer → Encapsulates the entire Core Data stack.
+ NSPersistentStoreCoordinator → Connects objects to the persistent store.
+ NSFetchRequest → Retrieves data from Core Data.
+ NSPersistentStore → Physical storage (SQLite, XML, Binary, etc.).
+ 
+ */
+
+/*
+// What is a Managed Object Context?
+ It is a temporary workspace for managing Core Data objects. You use it to fetch, insert, delete, and save data. Changes aren’t persisted to the store until you call save().
+ 
+ */
+
+//MARK: - What is a Persistent Container in Core Data?
+/*
+ NSPersistentContainer simplifies the Core Data stack setup. It includes the context, model, and store coordinator. Introduced in iOS 10.
+ */
+
+//MARK: - What is an NSFetchedResultsController?
+/*
+ A controller that efficiently monitors changes in a managed object context for use in table/collection views. It fetches and observes changes in data and updates the UI automatically.
+ */
 
 
 
