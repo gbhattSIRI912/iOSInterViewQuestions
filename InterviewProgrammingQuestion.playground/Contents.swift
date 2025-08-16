@@ -209,3 +209,61 @@ do {
 } catch {
     print(error)
 }
+
+//MARK: - Given a string, reverse it without using the built-in reversed() method.
+let greeting = "Hello world"
+var reverse = ""
+for i in greeting {
+    reverse = String(i) + reverse
+}
+print(reverse)
+
+//MARK: - Given a string, return the first non-repeating character. If all characters repeat, return nil.
+
+func firstNonRepeatingChar(_ str: String) -> Character? {
+    var charCount: [Character: Int] = [:]
+    
+    for char in str {
+        charCount[char, default: 0] += 1
+    }
+    
+    for char in str {
+        if charCount[char] == 1 {
+            return char
+        }
+    }
+    
+    return nil
+}
+print(firstNonRepeatingChar("abacabad"))
+print(firstNonRepeatingChar("aabbcc"))
+
+// MARK: - Given two sorted arrays, merge them into a single sorted array.
+func mergeSortedArrays(_ arr1: [Int], _ arr2: [Int]) -> [Int] {
+    var result = [Int]()
+    var i = 0, j = 0
+    
+    while i < arr1.count && j < arr2.count {
+        if arr1[i] < arr2[j] {
+            result.append(arr1[i])
+            i += 1
+        } else {
+            result.append(arr2[j])
+            j += 1
+        }
+    }
+    
+    while i < arr1.count {
+        result.append(arr1[i])
+        i += 1
+    }
+    
+    while j < arr2.count {
+        result.append(arr2[j])
+        j += 1
+    }
+    
+    return result
+}
+
+print(mergeSortedArrays([1, 3, 5], [2, 4, 6]))

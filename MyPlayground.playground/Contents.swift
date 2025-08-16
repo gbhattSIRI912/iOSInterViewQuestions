@@ -72,6 +72,7 @@ let person1 = Person(name: "john")
 print("<<<<<<<<<<Example of Class for person1 \(person1.name)")
 let person2 = Person(name: "gaurav")
 print("<<<<<<<Example of Class for person2 \(person1.name)")
+//Output:-John, John
 //MARK: - Conclusion for class:
 /*1. Classes are reference types
  2. Classes support inheritance
@@ -95,7 +96,7 @@ print("struct example>>>>>\(personStru1.name)")
 
 let personStru2 = personStruct(name: "Saif")
 print("struct example2>>>>>\(personStru2.name)")
-
+//Output:-kamal, saif
 //MARK: - Conclusion for Struct:
 /*
  1. Structs are value types
@@ -126,7 +127,21 @@ print("struct example2>>>>>\(personStru2.name)")
  
  */
 
-//Mark: - Access Modifire:- Swift provides five access control levels to restrict access to code entities like classes, structs, properties, and methods. These define where and how a piece of code can be accessed
+//MARK: - What is the hierarchy of UIButton?
+/*
+ UIButton-> UIControl -> UIVIew -> UIResponder -> NSObject
+ */
+
+//MARK: - SOLID Principle
+/*
+ S :- (Single Responsibility Principle) A class should have one  an only one reason to change (A class should have only one Responsibility)
+ O :- (Open / Close Principle) Software entities (class, modules, Functions etc.) should be open for extension but close for modification.
+ L :- (Liskov Substitution Principle) Objects of a super class should be replaceble with objects of a subclass without efficting the correction of the program.
+ I :- (Interface Segregation Principle) Client should not be forced to depend on interface they do not use
+ D :- (Dependency Inversion Principle) Hight level modules should not depend on low - level modules . both should depend on abstraction.
+ */
+
+//MARK: - Access Modifire:- Swift provides five access control levels to restrict access to code entities like classes, structs, properties, and methods. These define where and how a piece of code can be accessed
 
 /* Internal(Default), public, Private, fileprivate, open
  
@@ -202,7 +217,7 @@ print("struct example2>>>>>\(personStru2.name)")
 // MARK: - Weak, strong and Unowned
 /*
  Weak:- A weak reference does not retain the object, meaning it does not increase the object's reference count.
- -: Weak references can become nil when the referenced object is deallocated.
+ -: Weak references can become nil when the referenced object is deallocated. //Optional
  Example:-
  class Car {
      var model: String
@@ -246,7 +261,7 @@ print("struct example2>>>>>\(personStru2.name)")
  person1 = nil  // The object is not deallocated because person2 still holds a reference to it
 
  
- Unowned:- An unowned reference is similar to a weak reference, but with a key difference: it assumes the referenced object will not be deallocated while the reference is still in use.
+ Unowned:- An unowned reference is similar to a weak reference, but with a key difference: it assumes the referenced object will not be deallocated while the reference is still in use.//Optional
  Example:-
  class Person {
      var name: String
@@ -285,7 +300,10 @@ print("struct example2>>>>>\(personStru2.name)")
  class DatabaseManager {
      // 1. Create a static constant for the shared instance
      static let shared = DatabaseManager()
+ private init() {}
  }
+ 
+ DatabaseManager.shared.etc..
  */
 
 // MARK: - Generics:- Generics allow you to write flexible, reusable code that works with any type while still maintaining type safety. They enable you to write functions, classes, structures, and enums that can work with any type, while still maintaining strong type safety.
@@ -294,9 +312,8 @@ print("struct example2>>>>>\(personStru2.name)")
  func printElement<T>(element: T) {
      print(element)
  }
- 
- 
  */
+
 // MARK: - Lazy:- The value of the property is not calculated or initialized until it's accessed for the first time.
 // : lazy can only be applied to variables (var), not constants (let).
 
@@ -403,14 +420,7 @@ car = nil
 // MARK: - Closures in Swift
 
 /*
- A closure in Swift is a self-contained block of code that can be passed around and executed later. Closures are similar to functions but can capture and store references to variables and constants from their surrounding context.
- 
- Closures can:
- 
- ● Be stored in variables
- ● Be passed as parameters
- ● Return values
- ● Capture external values
+ Closures are self-contained blocks of functionality that can be passed around and used in your code. Closures can capture and store references to any constants and variables from the context in which they’re defined.
  
  Basic Closure Syntax:-
  
@@ -418,6 +428,8 @@ car = nil
      print("Hello, \(name)!")
  }
  greet("Gaurav")  // Output: Hello, Gaurav!
+ 
+ There are two type of closures: 1. non-Escaping 2. Escaping closures
 
  Non-Escaping Closures (Default):- A non-escaping closure is executed immediately within the function and is not stored after the function exits.
  
@@ -434,10 +446,6 @@ car = nil
  
  Note:- Trailing closures make code cleaner and more readable, especially in SwiftUI or
  async tasks.
- 
- 
- 
- 
  
  typealias:- A typealias in Swift is used to create an alternative name for an existing type. It makes code more readable, flexible, and easier to maintain.
  syntax :- typealias NewName = ExistingType
@@ -496,12 +504,24 @@ ViewModel → The logic layer that manages UI-related logic and prepares data fo
  Frame:- The position and size of a view relative to its superview's coordinate system.
  bounds:- The size and internal coordinate system of the view relative to itself.
  */
+
+//MARK: -  KVO and KVC
+/*
+KVC - (Key-Value Coding), KVC allows you to access and modify an object’s properties dynamically using string keys.
+ KVO - (Key-Value Observing), KVO lets you observe changes to property values.
+ */
+
 //MARK: - Any, AnyObject, and AnyClass
 /*
  Any – Represents any type (including value and reference types).
  AnyObject – Represents only reference types (i.e., instances of classes).
  AnyClass – Represents a metatype of a class (Class.Type).
 
+ */
+//MARK: - NotificationCenter
+/*
+ 🔔 What is NotificationCenter?
+ NotificationCenter is a singleton class (NotificationCenter.default) used to post and observe named notifications within a process.
  */
 
 //MARK: - SwiftUI Related
@@ -517,7 +537,7 @@ ViewModel → The logic layer that manages UI-related logic and prepares data fo
  1. UIKit requires more manual setup and boilerplate code.
  2. UIKit needs you to run the simulator to see changes.
  3. UIKit is only for iOS/iPadOS.
- 4. n UIKit, you have to handle it manually.
+ 4. UIKit, you have to handle it manually.
  5. UIKit requires delegates, notifications, or observers.
  
  */
@@ -527,7 +547,6 @@ ViewModel → The logic layer that manages UI-related logic and prepares data fo
  2. SwiftUI frequently recreates views, structs are lightweight and more efficient than classes.
  3. structs are value types, they don’t require Automatic Reference Counting (ARC).
  4. Structs are immutable by default, making UI updates more predictable.
- 5.
  */
 
 //MARK: - SwiftUI view Life cycle
@@ -541,6 +560,7 @@ ViewModel → The logic layer that manages UI-related logic and prepares data fo
  */
 
 /*
+ 
  @State
 Used for local state within a view. When the value changes, the view updates.
  
@@ -575,6 +595,21 @@ Used for local state within a view. When the value changes, the view updates.
  behaviors like validation, data storage, and synchronization.
  
  A property wrapper is defined using the @ symbol and can be applied to any property.
+ */
+
+//What is a Delegate in Swift?
+/*
+ A delegate in Swift is a design pattern that allows one object to communicate with another in a decoupled and flexible way. It's commonly used for passing data or handling events between two objects.
+ 
+ Why Use Delegates?
+ To allow custom behavior in another class.
+ To separate responsibilities (e.g., UI from logic).
+ To enable loose coupling (one object doesn’t need to know everything about another).
+ */
+
+//What is protocol in swift?
+/*
+ A protocol in Swift is a blueprint of methods, properties, and other requirements that can be adopted by a class, struct, or enum. Any type that conforms to the protocol must provide implementations for all of its requirements.
  */
 
 // MARK: - Core Data Related
@@ -615,5 +650,137 @@ Used for local state within a view. When the value changes, the view updates.
  A controller that efficiently monitors changes in a managed object context for use in table/collection views. It fetches and observes changes in data and updates the UI automatically.
  */
 
+//MARK: - Small question
+/*
+ Why are @IBOutlets weak? -> To avoid retain cycles and allow proper memory cleanup.
+*/
 
+//
+//git init    Initialize a new Git repository
+//git clone <repo-url>    Clone a remote repository
+//git status    Show current changes and staged files
+//git add <file>    Stage file(s) for commit
+//git commit -m "message"    Commit staged changes with a message
+//git push    Push commits to remote repository
+//git pull    Fetch and merge latest changes from remote
+//git fetch   Fetch changes from remote (no merge)
 
+//git branch List all local branches
+//git branch <name> Create a new branch
+//git checkout <branch> Switch to another branch
+//git switch <branch>  (Newer alternative to checkout)
+//git merge <branch> Merge another branch into current branch
+//git rebase <branch> Rebase current branch onto another (cleaner history)
+
+//MARK: - What is Concurrency?
+/*
+ Concurrency is the ability of a program to perform multiple tasks (or processes) at the same time.
+ 
+ How to Achieve Concurrency in iOS-:
+ 1. Grand Central Dispatch (GCD) - GCD (Grand Central Dispatch) is a low-level API in Swift used to manage concurrent and asynchronous tasks
+ 2. Operation & OperationQueue
+ 3. Swift Concurrency (async/await) – iOS 13+ (Full support from iOS 15)
+ 
+ 1. Dispatch Queue - A queue that executes tasks in a FIFO (First-In-First-Out) order.
+ 
+ Operation → A single task (like download image, load data, etc)
+ OperationQueue → A task manager that runs multiple operations in background, one by one or together (based on settings)
+ 
+ */
+
+func countVowels(in input: String) -> [Character: Int] {
+    let vowels: Set<Character> = ["a", "e", "i", "o", "u"]
+    var vowelCount: [Character: Int] = [:]
+
+    for char in input.lowercased() {
+        if vowels.contains(char) {
+            vowelCount[char, default: 0] += 1
+        }
+    }
+
+    return vowelCount
+}
+
+// Your string
+let input = "qwertyuiopasdfghjklzxcvbnmqwertyuiop"
+let result = countVowels(in: input)
+print("Vowel counts: \(result)")
+
+//MARK: Some basic
+/*data type: - Int , Double, float, Bool, string
+ 
+ //diff b/w float and double : - 1. float is 32bit(4 byte) but double is 64bit(8 byte)
+ 2. float is Approximately 6 decimal digits but double is Approximately 15 decimal digits
+ */
+
+//MARK: Collection type
+/*
+ 3 collection type
+ array: An ordered collection of values.
+ dictionaries: An unordered collection of key-value pairs.
+ Sets: An unordered collection of unique values.
+ 
+ Touple: A tuple in Swift is a group of multiple values combined into a single compound value.
+ example: - let person = ("John", 25, true)
+ 
+ Set: -  A Set in Swift is a collection type that stores unique, unordered values of the same type.
+ example: -
+ */
+
+// MARK: - Combine
+
+/*What is Combine?
+
+Combine is Apple’s reactive programming framework introduced in iOS 13. It allows you to:
+
+Work with publishers and subscribers
+Chain asynchronous and event-based code
+Reactively bind data to your SwiftUI views
+ 
+ Key Concepts
+
+Term    Description
+Publisher    Emits values over time (e.g., Just, PassthroughSubject)
+Subscriber    Listens to publishers and reacts to emitted values
+Operator    Modifies or transforms data from publishers
+Subject    Both a publisher and subscriber
+Cancellable    A token to manage subscriptions
+ 
+ 
+ Common Combine Operators
+
+ Operator    Purpose
+ .map    Transform values
+ .filter    Filter values
+ .debounce    Wait before emitting values
+ .merge    Merge multiple publishers
+ .combineLatest    Combine values from multiple publishers
+ .flatMap    Switch to another publisher
+ .assign    Assign value to a property
+ 
+ */
+
+//MARK: - Higher order function
+// Higher order functions are simply functions that operate on other functions by either taking a function as an argument, or returning a function.
+/*
+ 1. map -> Transforms each element in a collection.
+ let numbers = [1, 2, 3, 4]
+ let squares = numbers.map { $0 * $0 }
+ print(squares) // [1, 4, 9, 16]
+ 
+ 2. filter -> Returns elements that match a condition.
+ let numbers = [1, 2, 3, 4, 5]
+ let evenNumbers = numbers.filter { $0 % 2 == 0 }
+ print(evenNumbers)  // [2, 4]
+ 
+ 3. reduce -> Combines all elements into a single value.
+ let numbers = [1, 2, 3, 4, 5]
+ let sum = numbers.reduce(0) { $0 + $1 }
+ print(sum)  // 15
+ 
+ 4. compactMap -> Transforms and removes nil values.
+ let strings = ["1", "2", "abc", "4"]
+ let numbers = strings.compactMap { Int($0) }
+ print(numbers)  // [1, 2, 4]
+ 
+ */
